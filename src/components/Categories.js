@@ -1,53 +1,36 @@
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import data from "../data";
+import Card from "@mui/material/Card";
 
-const IMAGE_URL = "sourcerer.tech/assets/";
+const IMAGE_URL = "https://sourcerer.tech/assets";
 const Categories = () => {
   const secondaryCategory = data.map((cat) => cat.secondary_category.name);
   const uniqueCategories = [...new Set(secondaryCategory)];
-  console.log(data, "data..123");
   return (
-    <>
+    <Box>
       {uniqueCategories?.map((ctgry) => {
         return (
-          <Paper
-            sx={{
-              display: "flex",
-              m: 2,
-              p: 2,
-              maxWidth: 400,
-              background: "lightgray",
-            }}
-          >
-            <Box display="flex" flexDirection="column">
+          <Card sx={{ maxWidth: 275, padding: 2, margin: 2 }} p={2} m={2}>
+            <Box display="flex" flexDirection="column" mb={2}>
               <Box mt={1}>{ctgry}</Box>
               <Box mt={1}>
                 {secondaryCategory?.filter((c) => c === ctgry).length} Products
               </Box>
-              <Box mt={1}>
-                <img
-                  src="http://placehold.jp/100x100.png"
-                  alt="prdct-img"
-                  style={{ width: 100, height: 100, mr: 2 }}
-                />
-                <img
-                  src="http://placehold.jp/100x100.png"
-                  alt="prdct-img"
-                  style={{ width: 100, height: 100, mr: 2 }}
-                />
-
-                <img
-                  src="http://placehold.jp/100x100.png"
-                  alt="prdct-img"
-                  style={{ width: 100, height: 100 }}
-                />
-              </Box>
             </Box>
-          </Paper>
+            {data
+              .filter((id) => id.secondary_category.name === ctgry)
+              .map((image) => {
+                return (
+                  <img
+                    src={`${IMAGE_URL}/${image.product_images[0]?.directus_files_id}`}
+                    style={{ width: 70, height: 70 }}
+                  />
+                );
+              })}
+          </Card>
         );
       })}
-    </>
+    </Box>
   );
 };
 
