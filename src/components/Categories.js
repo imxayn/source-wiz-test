@@ -6,7 +6,7 @@ const IMAGE_URL = "sourcerer.tech/assets/";
 const Categories = () => {
   const secondaryCategory = data.map((cat) => cat.secondary_category.name);
   const uniqueCategories = [...new Set(secondaryCategory)];
-  console.log(data, "data..");
+  console.log(data, "data..123");
   return (
     <>
       {uniqueCategories?.map((ctgry) => {
