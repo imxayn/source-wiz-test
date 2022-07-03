@@ -22,9 +22,9 @@ const Categories = () => {
         },
       }}
     >
-      {uniqueCategories?.map((ctgry) => {
+      {uniqueCategories?.map((ctgry, index) => {
         return (
-          <Paper>
+          <Paper key={index}>
             <Box mt={1}>{ctgry}</Box>
             <Box mt={1}>
               {secondaryCategory?.filter((c) => c === ctgry).length} Products
@@ -35,6 +35,7 @@ const Categories = () => {
                   data.filter((i) => i.secondary_category.name === ctgry)[0]
                     ?.product_images[0]?.directus_files_id
                 }`}
+                alt="product_image"
                 style={{ width: 70, height: 70 }}
               />
             </Box>
