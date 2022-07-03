@@ -1,33 +1,44 @@
 import Box from "@mui/material/Box";
 import data from "../data";
-import Card from "@mui/material/Card";
+import Paper from "@mui/material/Paper";
 
 const IMAGE_URL = "https://sourcerer.tech/assets";
 const Categories = () => {
   const secondaryCategory = data.map((cat) => cat.secondary_category.name);
   const uniqueCategories = [...new Set(secondaryCategory)];
+
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        ml: 2,
+        "& > :not(style)": {
+          m: 1,
+          width: 128,
+          height: 128,
+          p: 2,
+          ml: 2,
+        },
+      }}
+    >
       {uniqueCategories?.map((ctgry) => {
         return (
-          <Card sx={{ maxWidth: 275, padding: 2, margin: 2 }} p={2} m={2}>
-            <Box display="flex" flexDirection="column" mb={2}>
-              <Box mt={1}>{ctgry}</Box>
-              <Box mt={1}>
-                {secondaryCategory?.filter((c) => c === ctgry).length} Products
-              </Box>
+          <Paper>
+            <Box mt={1}>{ctgry}</Box>
+            <Box mt={1}>
+              {secondaryCategory?.filter((c) => c === ctgry).length} Products
             </Box>
-            {data
-              .filter((id) => id.secondary_category.name === ctgry)
-              .map((image) => {
-                return (
-                  <img
-                    src={`${IMAGE_URL}/${image.product_images[0]?.directus_files_id}`}
-                    style={{ width: 70, height: 70 }}
-                  />
-                );
-              })}
-          </Card>
+            <Box display="flex">
+              <img
+                src={`${IMAGE_URL}/${
+                  data.filter((i) => i.secondary_category.name === ctgry)[0]
+                    ?.product_images[0]?.directus_files_id
+                }`}
+                style={{ width: 70, height: 70 }}
+              />
+            </Box>
+          </Paper>
         );
       })}
     </Box>
