@@ -25,8 +25,8 @@ const Categories = () => {
       {uniqueCategories?.map((ctgry, index) => {
         return (
           <Paper key={index}>
-            <Box mt={1}>{ctgry}</Box>
-            <Box mt={1}>
+            <Box mt={1} fontWeight="bold">{ctgry}</Box>
+            <Box mt={1} mb={1} sx={{fontSize:12}}>
               {secondaryCategory?.filter((c) => c === ctgry).length} Products
             </Box>
             <Box display="flex">
